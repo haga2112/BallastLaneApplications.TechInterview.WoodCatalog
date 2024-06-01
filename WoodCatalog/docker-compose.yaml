@@ -1,20 +1,19 @@
 services:
   web:
     image: woodcatalogapi:latest
-    depends_on:
-      - redis_image
     build:
       context: .
-      dockerfile: "../WoodCatalog.API/Dockerfile"
+      dockerfile: "/WoodCatalog.API/Dockerfile"
     ports:
-      - "8088:80"
-    links:
-      - "redis_image"
+      - "5000:8080"
+    depends_on:
+      - redis
     environment:
-          - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+    links:
+      - "redis"
 
-  redis_image:
+  redis:
     image: redis:alpine
-    container_name: redisWoodAPI
     ports:
       - 6379:6379
