@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WoodCatalog.API.Helpers;
 
 namespace WoodCatalog.API.Controllers
 {
@@ -22,7 +23,22 @@ namespace WoodCatalog.API.Controllers
         [HttpPost("login")]
         public ActionResult<bool> Login(string username, string password)
         {
-            return Ok(true);
+            // TODO: get do usuário
+
+            // TODO: comparar hash da senha
+            if (true)
+            {
+                var systemUser = new SystemUser();
+                systemUser.Id = Guid.NewGuid();
+                systemUser.Name = username;
+
+                var jwtToken = string.Empty;
+                //new TokenGenerator().GenerateJwtToken(systemUser);
+
+                return Ok(jwtToken);
+            }
+
+            return Unauthorized();
         }
     }
 }

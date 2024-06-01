@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WoodCatalog.Domain.Models;
 using WoodCatalog.Domain.Services.Interfaces;
 
 namespace WoodCatalog.API.Controllers
 {
+    //[Authorize]
     [ApiController]
     [Route("wood-catalog")]
     public class WoodController : ControllerBase
