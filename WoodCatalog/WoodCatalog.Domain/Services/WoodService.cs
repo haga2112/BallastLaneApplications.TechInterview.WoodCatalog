@@ -23,7 +23,7 @@ namespace WoodCatalog.Domain.Services
             return _woodRepository.Delete(id);
         }
 
-        public IEnumerable<Wood> GetAllWood()
+        public IEnumerable<Wood> GetAllWoods()
         {
             return _woodRepository.GetAll();
         }

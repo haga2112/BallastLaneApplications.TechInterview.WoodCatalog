@@ -4,7 +4,7 @@ namespace WoodCatalog.Domain.Services.Interfaces
 {
     public interface IWoodService
     {
-        IEnumerable<Wood> GetAllWood();
+        IEnumerable<Wood> GetAllWoods();
         Wood? GetWoodById(string id);
         void AddWood(Wood wood);
         Wood? UpdateWood(Wood wood);

@@ -30,6 +30,13 @@ namespace WoodCatalog.API.Controllers
             return Ok(wood);
         }
 
+        [HttpGet("get-all")]
+        public ActionResult<Wood> GetAllStudents()
+        {
+            var woods = _woodService.GetAllWoods();
+            return Ok(woods);
+        }
+
         [HttpPost()]
         public ActionResult<Wood> AddWood(Wood wood)
         {
