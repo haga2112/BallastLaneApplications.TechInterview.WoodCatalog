@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
 using System.Text;
+using UserCatalog.Domain.Services;
 using WoodCatalog.Domain.Repositories.Interfaces;
 using WoodCatalog.Domain.Services;
 using WoodCatalog.Domain.Services.Interfaces;
@@ -21,6 +22,8 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(options =>
 
 builder.Services.AddScoped<IWoodRepository, WoodRepository>();
 builder.Services.AddScoped<IWoodService, WoodService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 ConfigurationManager configuration = builder.Configuration;
 IWebHostEnvironment environment = builder.Environment;

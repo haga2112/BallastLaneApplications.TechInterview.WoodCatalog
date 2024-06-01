@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WoodCatalog.API.Helpers;
+using WoodCatalog.Domain.Models;
+using WoodCatalog.Domain.Services.Interfaces;
 
 namespace WoodCatalog.API.Controllers
 {
@@ -8,10 +10,13 @@ namespace WoodCatalog.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ILogger<AuthController> _logger;
+        private readonly IUserService _userService;
 
-        public AuthController(ILogger<AuthController> logger)
+        public AuthController(ILogger<AuthController> logger,
+                                IUserService userService)
         {
             _logger = logger;
+            _userService = userService;
         }
 
         [HttpPost("create-user")]
@@ -23,17 +28,11 @@ namespace WoodCatalog.API.Controllers
         [HttpPost("login")]
         public ActionResult<bool> Login(string username, string password)
         {
-            // TODO: get do usuário
+            (bool success, User? user) = _userService.LoginUser(username, password);
 
-            // TODO: comparar hash da senha
-            if (true)
+            if (success)
             {
-                var systemUser = new SystemUser();
-                systemUser.Id = Guid.NewGuid();
-                systemUser.Name = username;
-
-                var jwtToken = string.Empty;
-                //new TokenGenerator().GenerateJwtToken(systemUser);
+                var jwtToken = new TokenGenerator().GenerateJwtToken(user!);
 
                 return Ok(jwtToken);
             }

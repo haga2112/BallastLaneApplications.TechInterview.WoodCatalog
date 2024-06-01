@@ -2,35 +2,29 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using WoodCatalog.Domain.Models;
 
 namespace WoodCatalog.API.Helpers
 {
     public class TokenGenerator
     {
-        public IConfiguration _configuration { get; set; }
-
-        public TokenGenerator(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public string GenerateJwtToken(User user)
         {
             var claims = new List<Claim> {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Name),
+                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new(ClaimTypes.Name, user.Username),
             };
+
+            var secret = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("ApplicationSettings:JWT_Secret")!);
+            var key = new SymmetricSecurityKey(secret);
+            var signature = SecurityAlgorithms.HmacSha256Signature;
 
             var jwtToken = new JwtSecurityToken(
                 claims: claims,
                 notBefore: DateTime.UtcNow,
                 expires: DateTime.UtcNow.AddDays(30),
-                signingCredentials: new SigningCredentials(
-                    new SymmetricSecurityKey(
-                       Encoding.UTF8.GetBytes(_configuration["ApplicationSettings:JWT_Secret"])
-                        ),
-                    SecurityAlgorithms.HmacSha256Signature)
-                );
+                signingCredentials: new SigningCredentials(key, signature));
+
             return new JwtSecurityTokenHandler().WriteToken(jwtToken);
         }
     }
