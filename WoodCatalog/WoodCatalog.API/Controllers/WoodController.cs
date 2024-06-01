@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using WoodCatalog.Domain.Models;
+using WoodCatalog.Domain.Services;
+using WoodCatalog.Domain.Services.Interfaces;
 
 namespace WoodCatalog.API.Controllers
 {
@@ -7,34 +10,56 @@ namespace WoodCatalog.API.Controllers
     public class WoodController : ControllerBase
     {
         private readonly ILogger<WoodController> _logger;
+        private readonly IWoodService _woodService;
 
-        public WoodController(ILogger<WoodController> logger)
+        public WoodController(ILogger<WoodController> logger,
+                                IWoodService woodService)
         {
             _logger = logger;
+            _woodService = woodService;
         }
 
         [HttpGet()]
-        public ActionResult<string> Get(int id)
+        public ActionResult<Wood> GetWoodById(string id)
         {
-            return Ok();
+            var wood = _woodService.GetWoodById(id);
+
+            if (wood == null)
+            {
+                return NotFound();
+            }
+            return Ok(wood);
         }
 
         [HttpPost()]
-        public ActionResult<string> Add(string name)
+        public ActionResult<Wood> AddWood(Wood wood)
         {
-            return Ok();
+            _woodService.AddWood(wood);
+            return CreatedAtRoute(nameof(AddWood), new { wood.Id }, wood);
         }
 
-        [HttpPost]
-        public ActionResult<string> Update(int id, string name)
+        [HttpPut]
+        public ActionResult<Wood> UpdateWood(Wood wood)
         {
-            return Ok();
+            var woodToUpdate = _woodService.GetWoodById(wood.Id);
+            if (woodToUpdate == null)
+            {
+                return NotFound();
+            }
+            _woodService.UpdateWood(wood);
+            return Ok(wood);
+            //return NoContent();
         }
 
-        [HttpPost]
-        public ActionResult<string> Delete(int id)
+        [HttpDelete]
+        public ActionResult<Wood> Delete(string id)
         {
-            return Ok();
+            var wood = _woodService.DeleteWood(id);
+            if (wood == null)
+            {
+                return NotFound();
+            }
+            return Ok(wood);
         }
     }
 }
