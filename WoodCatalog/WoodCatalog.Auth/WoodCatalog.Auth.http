@@ -1,0 +1,6 @@
+@WoodCatalog.Auth_HostAddress = http://localhost:5012
+
+GET {{WoodCatalog.Auth_HostAddress}}/auth/
+Accept: application/json
+
+###
