@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WoodCatalog.API.Helpers;
 using WoodCatalog.Domain.Models;
@@ -19,16 +20,45 @@ namespace WoodCatalog.API.Controllers
             _userService = userService;
         }
 
+        [AllowAnonymous]
         [HttpPost("create-user")]
-        public ActionResult<bool> CreateUser(string username, string password)
+        public ActionResult CreateUser(User user)
         {
-            return Ok(true);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //if (string.IsNullOrEmpty(name))
+            //{
+            //    var nameCannotBeEmptyMessage = "Name cannot be empty";
+            //    _logger.LogError(nameCannotBeEmptyMessage);
+            //    return BadRequest(nameCannotBeEmptyMessage);
+            //}
+
+            //if (string.IsNullOrEmpty(password))
+            //{
+            //    var passwordCannotBeEmptyMessage = "Name cannot be empty";
+            //    _logger.LogError(passwordCannotBeEmptyMessage);
+            //    return BadRequest(passwordCannotBeEmptyMessage);
+            //}
+
+            //User user = new User 
+            //{ 
+            //    Name = name,
+            //    Password = password,
+            //};
+
+            _userService.AddUser(user);
+
+            return Ok();
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
-        public ActionResult<bool> Login(string username, string password)
+        public ActionResult<bool> Login(string id, string password)
         {
-            (bool success, User? user) = _userService.LoginUser(username, password);
+            (bool success, User? user) = _userService.LoginUser(id, password);
 
             if (success)
             {

@@ -19,6 +19,7 @@ namespace UserCatalog.Domain.Services
 
         public void AddUser(User user)
         {
+            // TODO: validations
             _userRepository.Add(user);
         }
 

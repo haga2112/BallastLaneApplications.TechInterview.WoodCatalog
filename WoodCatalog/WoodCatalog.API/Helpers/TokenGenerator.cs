@@ -11,8 +11,8 @@ namespace WoodCatalog.API.Helpers
         public string GenerateJwtToken(User user)
         {
             var claims = new List<Claim> {
-                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new(ClaimTypes.Name, user.Username),
+                new(ClaimTypes.NameIdentifier, user.Id),
+                new(ClaimTypes.Name, user.Name),
             };
 
             var secret = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("ApplicationSettings:JWT_Secret")!);

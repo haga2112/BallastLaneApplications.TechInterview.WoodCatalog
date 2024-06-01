@@ -5,7 +5,7 @@ using WoodCatalog.Domain.Services.Interfaces;
 
 namespace WoodCatalog.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("wood-catalog")]
     public class WoodController : ControllerBase
@@ -31,9 +31,9 @@ namespace WoodCatalog.API.Controllers
             }
             return Ok(wood);
         }
-
+        
         [HttpGet("get-all")]
-        public ActionResult<Wood> GetAllStudents()
+        public ActionResult<Wood> GetAllWoods()
         {
             var woods = _woodService.GetAllWoods();
             return Ok(woods);
