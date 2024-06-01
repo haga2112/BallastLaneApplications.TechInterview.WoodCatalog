@@ -5,11 +5,16 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodCatalog.API", "WoodCatalog.API\WoodCatalog.API.csproj", "{D9E889A2-0C3E-4F8B-A9CE-964EBF6D072C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodCatalog.Domain", "WoodCatalog.Domain\WoodCatalog.Domain.csproj", "{C2D37A2F-9EF3-408B-B0A7-95AA4CB9376C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodCatalog.Domain", "WoodCatalog.Domain\WoodCatalog.Domain.csproj", "{C2D37A2F-9EF3-408B-B0A7-95AA4CB9376C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodCatalog.Redis", "WoodCatalog.Redis\WoodCatalog.Redis.csproj", "{8F94358C-7962-4D87-A1E2-5EC17F9CC6CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodCatalog.Redis", "WoodCatalog.Redis\WoodCatalog.Redis.csproj", "{8F94358C-7962-4D87-A1E2-5EC17F9CC6CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodCatalog.Tests", "WoodCatalog.Tests\WoodCatalog.Tests.csproj", "{91A6C9BD-5F59-4F97-AD6F-E6CC0EB362C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodCatalog.Tests", "WoodCatalog.Tests\WoodCatalog.Tests.csproj", "{91A6C9BD-5F59-4F97-AD6F-E6CC0EB362C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{591C64E0-F0BB-4C59-A1A9-B67E3A501171}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

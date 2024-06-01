@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using WoodCatalog.Domain.Models;
-using WoodCatalog.Domain.Services;
 using WoodCatalog.Domain.Services.Interfaces;
 
 namespace WoodCatalog.API.Controllers
@@ -35,7 +34,7 @@ namespace WoodCatalog.API.Controllers
         public ActionResult<Wood> AddWood(Wood wood)
         {
             _woodService.AddWood(wood);
-            return CreatedAtRoute(nameof(AddWood), new { wood.Id }, wood);
+            return Ok(wood);
         }
 
         [HttpPut]
@@ -48,7 +47,6 @@ namespace WoodCatalog.API.Controllers
             }
             _woodService.UpdateWood(wood);
             return Ok(wood);
-            //return NoContent();
         }
 
         [HttpDelete]
