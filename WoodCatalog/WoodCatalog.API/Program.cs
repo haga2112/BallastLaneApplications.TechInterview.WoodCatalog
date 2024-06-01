@@ -17,8 +17,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IConnectionMultiplexer>(options =>
-    ConnectionMultiplexer.Connect("host.docker.internal:6379,abortConnect=false"));
+#if DEBUG
+    builder.Services.AddSingleton<IConnectionMultiplexer>(options =>
+        ConnectionMultiplexer.Connect("127.0.0.1:6379,abortConnect=false"));
+#else
+    builder.Services.AddSingleton<IConnectionMultiplexer>(options =>
+        ConnectionMultiplexer.Connect("host.docker.internal:6379,abortConnect=false"));
+#endif
 
 builder.Services.AddScoped<IWoodRepository, WoodRepository>();
 builder.Services.AddScoped<IWoodService, WoodService>();
