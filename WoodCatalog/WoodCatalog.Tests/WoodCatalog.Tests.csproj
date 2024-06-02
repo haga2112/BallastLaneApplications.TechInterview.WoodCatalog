@@ -21,4 +21,8 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="3 - Redis\Repositories\" />
+  </ItemGroup>
+
 </Project>

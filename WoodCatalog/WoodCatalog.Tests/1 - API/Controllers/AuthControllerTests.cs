@@ -1,8 +1,8 @@
 using Xunit;
 
-namespace WoodCatalog.Tests
+namespace WoodCatalog.Tests.Application.Controllers
 {
-    public class UnitTest1
+    public class AuthControllerTests
     {
         [Fact]
         public void Test1()
