@@ -40,7 +40,9 @@ namespace UserCatalog.Domain.Services
         public string ValidateToken(string token)
         {
             if (token == null)
+            {
                 return string.Empty;
+            }
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -52,7 +54,6 @@ namespace UserCatalog.Domain.Services
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
                     ClockSkew = TimeSpan.Zero
                 }, out SecurityToken validatedToken);
 
@@ -64,7 +65,6 @@ namespace UserCatalog.Domain.Services
             }
             catch
             {
-                // return null if validation fails
                 return string.Empty;
             }
         }

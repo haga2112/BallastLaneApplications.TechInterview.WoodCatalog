@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using System.Reflection;
 using WoodCatalog.Domain.Models;
 using WoodCatalog.Domain.Repositories.Interfaces;
 using WoodCatalog.Domain.Services.Interfaces;
@@ -29,7 +28,7 @@ namespace UserCatalog.Domain.Services
             }
 
             // hash password
-            //user.Password = BCrypt.HashPassword(model.Password);
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
 
             _userRepository.Add(user);
         }
@@ -63,7 +62,7 @@ namespace UserCatalog.Domain.Services
                 return (false, null);
             }
 
-            if (user.Password == password)
+            if (BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
                 return (true, user);
             }

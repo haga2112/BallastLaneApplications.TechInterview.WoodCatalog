@@ -53,7 +53,7 @@ namespace WoodCatalog.API.Controllers
 
             _userService.Register(user);
 
-            return Ok();
+            return Ok(user.Id);
         }
 
         [AllowAnonymous]
