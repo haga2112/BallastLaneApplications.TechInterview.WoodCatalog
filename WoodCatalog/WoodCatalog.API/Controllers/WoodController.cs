@@ -21,7 +21,7 @@ namespace WoodCatalog.API.Controllers
         }
 
         [HttpGet()]
-        public ActionResult<Wood> GetWoodById(string id)
+        public IActionResult GetWoodById(string id)
         {
             var wood = _woodService.GetWoodById(id);
 
@@ -33,21 +33,21 @@ namespace WoodCatalog.API.Controllers
         }
         
         [HttpGet("get-all")]
-        public ActionResult<Wood> GetAllWoods()
+        public IActionResult GetAllWoods()
         {
             var woods = _woodService.GetAllWoods();
             return Ok(woods);
         }
 
         [HttpPost()]
-        public ActionResult<Wood> AddWood(Wood wood)
+        public IActionResult AddWood(Wood wood)
         {
             _woodService.AddWood(wood);
             return Ok(wood);
         }
 
         [HttpPut]
-        public ActionResult<Wood> UpdateWood(Wood wood)
+        public IActionResult UpdateWood(Wood wood)
         {
             var woodToUpdate = _woodService.GetWoodById(wood.Id);
             if (woodToUpdate == null)
@@ -59,7 +59,7 @@ namespace WoodCatalog.API.Controllers
         }
 
         [HttpDelete]
-        public ActionResult<Wood> Delete(string id)
+        public IActionResult Delete(string id)
         {
             var wood = _woodService.DeleteWood(id);
             if (wood == null)
