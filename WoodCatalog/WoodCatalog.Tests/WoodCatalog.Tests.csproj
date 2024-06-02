@@ -24,10 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="3 - Redis\Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\WoodCatalog.API\WoodCatalog.API.csproj" />
     <ProjectReference Include="..\WoodCatalog.Domain\WoodCatalog.Domain.csproj" />
   </ItemGroup>
