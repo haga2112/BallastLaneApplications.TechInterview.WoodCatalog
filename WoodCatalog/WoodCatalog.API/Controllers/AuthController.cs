@@ -26,31 +26,6 @@ namespace WoodCatalog.API.Controllers
         [HttpPost("register")]
         public ActionResult Register(User user)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            //if (string.IsNullOrEmpty(name))
-            //{
-            //    var nameCannotBeEmptyMessage = "Name cannot be empty";
-            //    _logger.LogError(nameCannotBeEmptyMessage);
-            //    return BadRequest(nameCannotBeEmptyMessage);
-            //}
-
-            //if (string.IsNullOrEmpty(password))
-            //{
-            //    var passwordCannotBeEmptyMessage = "Name cannot be empty";
-            //    _logger.LogError(passwordCannotBeEmptyMessage);
-            //    return BadRequest(passwordCannotBeEmptyMessage);
-            //}
-
-            //User user = new User 
-            //{ 
-            //    Name = name,
-            //    Password = password,
-            //};
-
             _userService.Register(user);
 
             return Ok(user.Id);

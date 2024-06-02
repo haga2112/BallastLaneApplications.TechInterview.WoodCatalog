@@ -7,10 +7,10 @@ namespace WoodCatalog.Domain.Models
         public string Id { get; set; } = $"user:{Guid.NewGuid().ToString()}";
 
         [Required]
-        public required string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
         
         [Required]
-        public required string Password { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
 
     }
 }

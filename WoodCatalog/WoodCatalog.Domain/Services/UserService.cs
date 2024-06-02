@@ -20,12 +20,23 @@ namespace UserCatalog.Domain.Services
         public void Register(User user)
         {
             // TODO: validations
-            var allUsers = _userRepository.GetAll();
+            //if (string.IsNullOrEmpty(name))
+            //{
+            //    var nameCannotBeEmptyMessage = "Name cannot be empty";
+            //    _logger.LogError(nameCannotBeEmptyMessage);
+            //}
 
-            if (allUsers.Any(x => x.Id == user.Id || x.Name == user.Name))
-            {
-                // validate
-            }
+            //if (string.IsNullOrEmpty(password))
+            //{
+            //    var passwordCannotBeEmptyMessage = "Name cannot be empty";
+            //    _logger.LogError(passwordCannotBeEmptyMessage);
+            //}
+
+            //var allUsers = _userRepository.GetAll();
+            //if (allUsers.Any(x => x.Id == user.Id || x.Name == user.Name))
+            //{
+            //    // validate
+            //}
 
             // hash password
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);

@@ -30,6 +30,8 @@ namespace WoodCatalog.Domain.Services
 
         public Wood? GetWoodById(string id)
         {
+            //TODO: validate prefix "wood"
+
             return _woodRepository.GetById(id);
         }
 
