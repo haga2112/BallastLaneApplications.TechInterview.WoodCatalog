@@ -59,7 +59,7 @@ namespace WoodCatalog.API.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete(string id)
+        public IActionResult DeleteWood(string id)
         {
             var wood = _woodService.DeleteWood(id);
             if (wood == null)

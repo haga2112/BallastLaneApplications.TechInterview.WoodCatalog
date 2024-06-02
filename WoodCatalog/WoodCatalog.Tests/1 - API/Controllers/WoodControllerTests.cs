@@ -66,5 +66,64 @@ namespace WoodCatalog.Tests.Application.Controllers
             Assert.Equal((int)HttpStatusCode.OK, okResult.StatusCode);
             _mocker.GetMock<IWoodService>().Verify(x => x.GetAllWoods(), Times.Once);
         }
+
+        [Fact]
+        public void AddWood_MustExecuteWithSuccess()
+        {
+            // Arrange
+            Wood wood = WoodTestsFaker.GenerateRandom().Generate();
+            _mocker.GetMock<IWoodService>().Setup(x => x.AddWood(wood));
+
+            // Act
+            IActionResult actionResult = _woodController.AddWood(wood);
+
+            // assert
+            var okResult = (OkObjectResult)actionResult;
+            Assert.NotNull(okResult);
+            Assert.True(okResult is OkObjectResult);
+            Assert.IsType<Wood>(okResult.Value);
+            Assert.Equal((int)HttpStatusCode.OK, okResult.StatusCode);
+            _mocker.GetMock<IWoodService>().Verify(x => x.AddWood(wood), Times.Once);
+        }
+
+        [Fact]
+        public void UpdateWood_MustExecuteWithSuccess()
+        {
+            // Arrange
+            Wood wood = WoodTestsFaker.GenerateRandom().Generate();
+            _mocker.GetMock<IWoodService>().Setup(x => x.GetWoodById(wood.Id)).Returns(wood);
+            _mocker.GetMock<IWoodService>().Setup(x => x.UpdateWood(wood)).Returns(wood);
+
+            // Act
+            IActionResult actionResult = _woodController.UpdateWood(wood);
+
+            // assert
+            var okResult = (OkObjectResult)actionResult;
+            Assert.NotNull(okResult);
+            Assert.True(okResult is OkObjectResult);
+            Assert.IsType<Wood>(okResult.Value);
+            Assert.Equal((int)HttpStatusCode.OK, okResult.StatusCode);
+            _mocker.GetMock<IWoodService>().Verify(x => x.UpdateWood(wood), Times.Once);
+        }
+
+        [Fact]
+        public void DeleteWood_MustExecuteWithSuccess()
+        {
+            // Arrange
+            Wood wood = WoodTestsFaker.GenerateRandom().Generate();
+            //_mocker.GetMock<IWoodService>().Setup(x => x.GetWoodById(wood.Id)).Returns(wood);
+            _mocker.GetMock<IWoodService>().Setup(x => x.DeleteWood(wood.Id)).Returns(wood);
+
+            // Act
+            IActionResult actionResult = _woodController.DeleteWood(wood.Id);
+
+            // assert
+            var okResult = (OkObjectResult)actionResult;
+            Assert.NotNull(okResult);
+            Assert.True(okResult is OkObjectResult);
+            Assert.IsType<Wood>(okResult.Value);
+            Assert.Equal((int)HttpStatusCode.OK, okResult.StatusCode);
+            _mocker.GetMock<IWoodService>().Verify(x => x.DeleteWood(wood.Id), Times.Once);
+        }
     }
 }
