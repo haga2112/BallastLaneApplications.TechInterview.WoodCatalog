@@ -1,10 +1,5 @@
 ﻿using StackExchange.Redis;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using WoodCatalog.Domain.Models;
 using WoodCatalog.Domain.Repositories.Interfaces;
 
