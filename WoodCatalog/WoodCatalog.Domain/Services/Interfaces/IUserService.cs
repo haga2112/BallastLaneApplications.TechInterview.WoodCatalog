@@ -6,7 +6,7 @@ namespace WoodCatalog.Domain.Services.Interfaces
     {
         IEnumerable<User> GetAllUsers();
         User? GetUserById(string id);
-        void AddUser(User user);
+        void Register(User user);
         User? UpdateUser(User user);
         User? DeleteUser(string id);
         (bool success, User? user) LoginUser(string id, string password);

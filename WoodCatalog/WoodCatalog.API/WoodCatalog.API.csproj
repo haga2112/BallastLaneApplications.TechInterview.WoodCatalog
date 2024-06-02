@@ -21,4 +21,8 @@
     <ProjectReference Include="..\WoodCatalog.Redis\WoodCatalog.Redis.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+  </ItemGroup>
+
 </Project>

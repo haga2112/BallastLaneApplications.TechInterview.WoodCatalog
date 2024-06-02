@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WoodCatalog.API.Helpers;
 using WoodCatalog.Domain.Models;
 using WoodCatalog.Domain.Services.Interfaces;
 
@@ -12,17 +11,20 @@ namespace WoodCatalog.API.Controllers
     {
         private readonly ILogger<AuthController> _logger;
         private readonly IUserService _userService;
+        private readonly ITokenService _tokenService;
 
         public AuthController(ILogger<AuthController> logger,
-                                IUserService userService)
+                                IUserService userService,
+                                ITokenService tokenService)
         {
             _logger = logger;
             _userService = userService;
+            _tokenService = tokenService;
         }
 
         [AllowAnonymous]
-        [HttpPost("create-user")]
-        public ActionResult CreateUser(User user)
+        [HttpPost("register")]
+        public ActionResult Register(User user)
         {
             if (!ModelState.IsValid)
             {
@@ -49,7 +51,7 @@ namespace WoodCatalog.API.Controllers
             //    Password = password,
             //};
 
-            _userService.AddUser(user);
+            _userService.Register(user);
 
             return Ok();
         }
@@ -62,7 +64,7 @@ namespace WoodCatalog.API.Controllers
 
             if (success)
             {
-                var jwtToken = new TokenGenerator().GenerateJwtToken(user!);
+                var jwtToken = _tokenService.GenerateJwtToken(user!);
 
                 return Ok(jwtToken);
             }

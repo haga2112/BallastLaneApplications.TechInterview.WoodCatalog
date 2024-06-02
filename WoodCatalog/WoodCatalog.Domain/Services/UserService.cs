@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using System.Reflection;
 using WoodCatalog.Domain.Models;
 using WoodCatalog.Domain.Repositories.Interfaces;
 using WoodCatalog.Domain.Services.Interfaces;
@@ -17,9 +18,19 @@ namespace UserCatalog.Domain.Services
             _userRepository = userRepository;
         }
 
-        public void AddUser(User user)
+        public void Register(User user)
         {
             // TODO: validations
+            var allUsers = _userRepository.GetAll();
+
+            if (allUsers.Any(x => x.Id == user.Id || x.Name == user.Name))
+            {
+                // validate
+            }
+
+            // hash password
+            //user.Password = BCrypt.HashPassword(model.Password);
+
             _userRepository.Add(user);
         }
 

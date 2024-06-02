@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
 using System.Text;
 using UserCatalog.Domain.Services;
+using WoodCatalog.Domain.Models;
 using WoodCatalog.Domain.Repositories.Interfaces;
 using WoodCatalog.Domain.Services;
 using WoodCatalog.Domain.Services.Interfaces;
@@ -25,6 +26,9 @@ builder.Services.AddSwaggerGen();
         ConnectionMultiplexer.Connect("host.docker.internal:6379,abortConnect=false"));
 #endif
 
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("ApplicationSettings"));
+
+builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IWoodRepository, WoodRepository>();
 builder.Services.AddScoped<IWoodService, WoodService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -45,7 +49,7 @@ builder.Services.AddAuthentication(cfg => {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8
-            .GetBytes(configuration["ApplicationSettings:JWT_Secret"]!)
+            .GetBytes(configuration["ApplicationSettings:JwtSecret"]!)
         ),
         ValidateIssuer = false,
         ValidateAudience = false,
