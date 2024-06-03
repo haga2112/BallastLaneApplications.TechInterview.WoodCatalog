@@ -11,6 +11,7 @@ namespace WoodCatalog.Tests.Fakers
 
             scopeFaker.RuleFor(u => u.Id, (f, u) => $"wood:{Guid.NewGuid}");
             scopeFaker.RuleFor(u => u.Name, (f, u) => f.Name.FirstName());
+            scopeFaker.RuleFor(u => u.Quality, (f, u) => f.Name.FirstName());
 
             return scopeFaker;
         }
